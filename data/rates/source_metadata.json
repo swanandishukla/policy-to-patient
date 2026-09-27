@@ -1,0 +1,19 @@
+{
+  "source_document_title": "CGHS rates applicable for treatment at healthcare organisation",
+  "document_reference": "F.No.5-16/CGHS(HQ)/HEC/2024(Part I)",
+  "issuing_authority": "Directorate General of Central Government Health Scheme, Ministry of Health and Family Welfare, Govt. of India",
+  "official_source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+  "secondary_source_url": "https://dgehs.delhi.gov.in/dghs/cghs-approved-rates-treatment-and-investigative-procedures",
+  "effective_date": "2025-10-13",
+  "issue_date": "2025-10-03",
+  "retrieval_date": "2026-09-27",
+  "local_source_file": "data/rates/source/cghs_rate.pdf",
+  "city_classification_scope": "Tier 1 (X Cities: Delhi, Mumbai, Kolkata, Chennai, Bengaluru, Hyderabad, Pune, Ahmedabad)",
+  "ward_rules": {
+    "base_rate_ward": "Semi-Private Ward",
+    "general_ward": "-5% adjustment on admissible package rate",
+    "private_ward": "+5% adjustment on admissible package rate",
+    "uniform_rate_services": "Consultations, radiotherapy, investigations, day care procedures, and minor procedures not requiring admission remain uniform across all ward entitlements."
+  },
+  "verification_statement": "All MVP procedure entries were extracted from Annexure-I Part A of cghs_rate.pdf and manually cross-checked against page numbers, code identifiers, procedure names, and published INR amounts."
+}

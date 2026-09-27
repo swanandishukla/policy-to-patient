@@ -1,0 +1,212 @@
+[
+  {
+    "procedure_code": "CN001",
+    "procedure_name": "Consultation OPD",
+    "speciality": "Consultation",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 350,
+      "NABH": 350,
+      "Super Speciality": 350
+    },
+    "is_ward_dependent": false,
+    "rate_unit_or_package_basis": "per OPD consultation",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 7, Sr. No. 1",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Uniform rate across all ward categories as per OM rule 2(e)."
+  },
+  {
+    "procedure_code": "LB055",
+    "procedure_name": "Blood Glucose Random / Blood Glucose Fasting / Blood Glucose PP",
+    "speciality": "Laboratory Investigation",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 34,
+      "NABH": 40,
+      "Super Speciality": 40
+    },
+    "is_ward_dependent": false,
+    "rate_unit_or_package_basis": "per investigation sample",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 9, Sr. No. 58",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Laboratory investigation rate uniform across ward entitlements."
+  },
+  {
+    "procedure_code": "CI001",
+    "procedure_name": "Electrocardiogram (ECG)",
+    "speciality": "Cardiology Investigation",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 149,
+      "NABH": 175,
+      "Super Speciality": 175
+    },
+    "is_ward_dependent": false,
+    "rate_unit_or_package_basis": "per test",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 57, Sr. No. 1186",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Includes cost of ECG leads and electrodes."
+  },
+  {
+    "procedure_code": "RI034",
+    "procedure_name": "X Ray Chest PA / AP / Oblique view (one film)",
+    "speciality": "Radiological Investigation",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 196,
+      "NABH": 230,
+      "Super Speciality": 230
+    },
+    "is_ward_dependent": false,
+    "rate_unit_or_package_basis": "per film",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 21, Sr. No. 372",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Radiological investigation rate uniform across ward entitlements."
+  },
+  {
+    "procedure_code": "RI001",
+    "procedure_name": "2D echocardiography",
+    "speciality": "Radiological Investigation",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 1254,
+      "NABH": 1475,
+      "Super Speciality": 1475
+    },
+    "is_ward_dependent": false,
+    "rate_unit_or_package_basis": "per procedure",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 20, Sr. No. 339",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Diagnostic echocardiography."
+  },
+  {
+    "procedure_code": "RI089",
+    "procedure_name": "MRI Head / Brain – Without Contrast",
+    "speciality": "Radiological Investigation",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 2338,
+      "NABH": 2750,
+      "Super Speciality": 2750
+    },
+    "is_ward_dependent": false,
+    "rate_unit_or_package_basis": "per scan",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 23, Sr. No. 427",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Diagnostic MRI scan without contrast media."
+  },
+  {
+    "procedure_code": "OP099",
+    "procedure_name": "Small Incision Cataract Surgery (SICS) with IOL excluding the cost of IOL per eye",
+    "speciality": "Ophthalmology Procedure",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 11390,
+      "NABH": 13400,
+      "Super Speciality": 13400
+    },
+    "is_ward_dependent": true,
+    "rate_unit_or_package_basis": "package rate per eye (excluding IOL cost)",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 49, Sr. No. 988",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Package rate for semi-private ward. General ward is -5%, Private ward is +5%."
+  },
+  {
+    "procedure_code": "NU122",
+    "procedure_name": "Haemodialysis for Sero negative cases including Dialyser and all other Consumables",
+    "speciality": "Nephrology And Urology Procedure",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 2125,
+      "NABH": 2500,
+      "Super Speciality": 2500
+    },
+    "is_ward_dependent": true,
+    "rate_unit_or_package_basis": "package rate per session including dialyser and consumables",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 92, Sr. No. 1686",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Dialysis package rate includes dialyser and all consumables."
+  },
+  {
+    "procedure_code": "AG095",
+    "procedure_name": "Laparoscopic Appendectomy",
+    "speciality": "Abdomen/GI Surgery Procedure",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 28050,
+      "NABH": 33000,
+      "Super Speciality": 37950
+    },
+    "is_ward_dependent": true,
+    "rate_unit_or_package_basis": "package procedure rate",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 75, Sr. No. 1443",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Surgical package rate for semi-private ward base. General ward is -5%, Private ward is +5%."
+  },
+  {
+    "procedure_code": "OR089",
+    "procedure_name": "Total Knee Joint Replacement (TKR) - Unilateral",
+    "speciality": "Orthopaedics Procedure",
+    "city_category": "Tier 1 (X City)",
+    "hospital_accreditation_options": ["Non-NABH", "NABH", "Super Speciality"],
+    "ward_entitlement_options": ["General Ward", "Semi-Private Ward", "Private Ward"],
+    "rates_inr": {
+      "Non-NABH": 129200,
+      "NABH": 152000,
+      "Super Speciality": 174800
+    },
+    "is_ward_dependent": true,
+    "rate_unit_or_package_basis": "package procedure rate (unilateral)",
+    "source_document": "CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I))",
+    "source_url": "https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf",
+    "effective_from": "2025-10-13",
+    "source_page_or_table": "Page 103, Sr. No. 1918",
+    "verification_status": "verified_against_source_pdf",
+    "notes": "Orthopaedic surgical package rate for semi-private ward base. General ward is -5%, Private ward is +5%."
+  }
+]

@@ -1,0 +1,24 @@
+Policy-to-Patient — Phase 1 Source Record
+
+Insurer: HDFC ERGO General Insurance Company Limited
+Exact product name: my:Optima Secure
+UIN / product identifier: HDFHLIP26058V082526
+Document type: Policy wording
+Document version/date: Not found
+Official source page URL: https://www.hdfcergo.com/download/policy-wordings/health
+Original downloaded filename: [Enter original filename if you remember it]
+Saved project filename: policy_wording.pdf
+Date downloaded: 27-09-2026
+
+Matching CIS available? Not checked yet
+CIS filename:
+CIS version/date:
+CIS source page or PDF URL:
+
+Text extraction check:
+Text on page 2 could be selected and copied: Yes
+
+Notes:
+- Publicly available product policy wording.
+- Version/date not found during initial check.
+- Do not assume or invent policy coverage rules.
