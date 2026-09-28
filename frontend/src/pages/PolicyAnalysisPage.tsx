@@ -176,21 +176,21 @@ export default function PolicyAnalysisPage() {
     <div>
       {/* Hero */}
       <div className="page-hero" style={{ paddingBottom: 'var(--space-6)' }}>
-        <h2 className="page-hero__title">Analyze your health insurance policy</h2>
+        <h2 className="page-hero__title" style={{ fontFamily: 'var(--font-family-heading)' }}>Analyze your health insurance policy</h2>
         <p className="page-hero__description">
-          Upload your policy PDF to extract sections, Table of Contents, and ask natural language questions with page citations.
+          Upload your policy PDF to extract sections, Table of Contents, and ask natural language questions with physical page citations.
         </p>
       </div>
 
       {/* Document Intelligence Scope Notice */}
-      <div className="info-box info-box--accent" style={{ marginBottom: 'var(--space-6)' }}>
+      <div className="info-box info-box--accent" style={{ marginBottom: 'var(--space-6)', borderRadius: '0px' }}>
         <div className="info-box__icon">
           <Info size={18} />
         </div>
         <div className="info-box__content">
           <p className="info-box__title">Document Intelligence Scope</p>
           <p className="info-box__text">
-            Question-answering uses Retrieval-Augmented Generation (RAG) to locate source passages and provide cited answers.
+            Question-answering uses lexical passage retrieval over extracted policy text to locate source passages and provide cited answers.
             It does <strong>not</strong> make formal claim approval decisions or replace official insurance advice.
           </p>
         </div>

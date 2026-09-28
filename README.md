@@ -118,7 +118,7 @@ Phase 3 implements a deterministic, traceable treatment rate calculator grounded
 | GET    | `/api/`                | Service information                                   |
 | GET    | `/api/policy/active`   | Active uploaded policy status                         |
 | POST   | `/api/policy/upload`   | Upload policy PDF, extract & index for Q&A            |
-| POST   | `/api/policy/qa`       | Ask questions against active policy using RAG         |
+| POST   | `/api/policy/qa`       | Ask questions against active policy using Grounded Lexical Passage Retrieval |
 | GET    | `/api/rates/procedures`| List verified procedure benchmark dataset & metadata  |
 | POST   | `/api/rates/estimate`  | Calculate transparent, deterministic treatment rate   |
 
@@ -130,7 +130,7 @@ Phase 3 implements a deterministic, traceable treatment rate calculator grounded
 |-------|------------------------------|-----------|
 | 0     | Foundation & UI Shell        | ✅ Completed |
 | 1     | Policy Upload & Extraction   | ✅ Completed |
-| 2     | AI & Retrieval (RAG)         | ✅ Completed |
+| 2     | AI & Lexical Passage Retrieval | ✅ Completed |
 | 3     | Treatment Cost Data & Calc   | ✅ Completed |
 | 4     | Policy Rules & Reconciliation| Upcoming  |
 | 5     | Testing & Demonstration      | Upcoming  |

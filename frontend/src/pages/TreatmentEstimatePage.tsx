@@ -118,7 +118,7 @@ export default function TreatmentEstimatePage() {
     <div>
       {/* Hero Header */}
       <div className="page-hero" style={{ paddingBottom: 'var(--space-6)' }}>
-        <h2 className="page-hero__title">Treatment Rate & Coverage Intelligence</h2>
+        <h2 className="page-hero__title" style={{ fontFamily: 'var(--font-family-heading)' }}>Treatment Rate & Coverage Intelligence</h2>
         <p className="page-hero__description">
           Calculate transparent out-of-pocket coverage estimates and reconcile official CGHS 2025 medical procedure rate benchmarks against active insurance policy wording clauses.
         </p>
@@ -130,7 +130,7 @@ export default function TreatmentEstimatePage() {
           display: 'flex',
           gap: 'var(--space-3)',
           marginBottom: 'var(--space-6)',
-          borderBottom: '1px solid var(--color-gray-200)',
+          borderBottom: '1px solid var(--color-slate-200)',
           paddingBottom: 'var(--space-3)',
           flexWrap: 'wrap',
         }}
@@ -138,7 +138,7 @@ export default function TreatmentEstimatePage() {
         <button
           onClick={() => setActiveTab('coverage')}
           className={`btn ${activeTab === 'coverage' ? 'btn--primary' : 'btn--secondary'}`}
-          style={{ gap: 'var(--space-2)', padding: 'var(--space-3) var(--space-5)' }}
+          style={{ gap: 'var(--space-2)', padding: 'var(--space-3) var(--space-5)', borderRadius: '0px' }}
           aria-selected={activeTab === 'coverage'}
         >
           <DollarSign size={18} /> Coverage & Out-of-Pocket Estimator
@@ -146,7 +146,7 @@ export default function TreatmentEstimatePage() {
         <button
           onClick={() => setActiveTab('reconcile')}
           className={`btn ${activeTab === 'reconcile' ? 'btn--primary' : 'btn--secondary'}`}
-          style={{ gap: 'var(--space-2)', padding: 'var(--space-3) var(--space-5)' }}
+          style={{ gap: 'var(--space-2)', padding: 'var(--space-3) var(--space-5)', borderRadius: '0px' }}
           aria-selected={activeTab === 'reconcile'}
         >
           <GitCompare size={18} /> Policy & Rate Reconciliation
@@ -154,10 +154,10 @@ export default function TreatmentEstimatePage() {
         <button
           onClick={() => setActiveTab('calculator')}
           className={`btn ${activeTab === 'calculator' ? 'btn--primary' : 'btn--secondary'}`}
-          style={{ gap: 'var(--space-2)', padding: 'var(--space-3) var(--space-5)' }}
+          style={{ gap: 'var(--space-2)', padding: 'var(--space-3) var(--space-5)', borderRadius: '0px' }}
           aria-selected={activeTab === 'calculator'}
         >
-          <Calculator size={18} /> CGHS Benchmark Calculator
+          <Calculator size={18} /> CGHS Benchmark Rate Lookup
         </button>
       </div>
 
@@ -168,17 +168,17 @@ export default function TreatmentEstimatePage() {
       ) : (
         <>
           {/* Dataset & Scope Banner */}
-          <div className="card" style={{ marginBottom: 'var(--space-6)', background: 'linear-gradient(135deg, rgba(13, 148, 136, 0.05) 0%, rgba(20, 184, 166, 0.08) 100%)', border: '1px solid rgba(20, 184, 166, 0.2)' }}>
+          <div className="card" style={{ marginBottom: 'var(--space-6)', backgroundColor: 'var(--color-slate-50)', border: '1px solid var(--color-slate-200)', borderRadius: '0px' }}>
             <div className="card__body" style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
-              <div style={{ background: 'var(--color-teal-500)', color: 'white', borderRadius: 'var(--radius-md)', padding: 'var(--space-3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ background: 'var(--color-teal-600)', color: 'white', borderRadius: '0px', padding: 'var(--space-3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <ShieldCheck size={24} />
               </div>
               <div style={{ flex: 1, minWidth: '260px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
-              <h3 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-navy-800)' }}>
-                Curated MVP Reference Benchmark: CGHS Schedule 2025
+              <h3 style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-slate-900)' }}>
+                Official CGHS 2025 Reference Benchmark Schedule
               </h3>
-              <span className="badge badge--teal">Curated Subset</span>
+              <span className="badge badge--teal">Reference Tariff</span>
             </div>
             <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-600)', marginTop: 'var(--space-1)', lineHeight: '1.5' }}>
               Document Ref: <strong>F.No.5-16/CGHS(HQ)/HEC/2024(Part I)</strong> • Effective Date: <strong>13 October 2025</strong> (may be subject to future official amendments) • Scope: <strong>Tier 1 / X Cities</strong>

@@ -1,7 +1,7 @@
 /**
  * PolicySummaryCardsView — Automatic Policy Summary Cards.
  * Automatically retrieves 6 key policy topic categories (Waiting Periods, Room Rent, Co-Pay,
- * Key Exclusions, PED, Sum Insured) from the active policy PDF with physical PDF page citations.
+ * Key Exclusions, Pre-existing Disease, Sum Insured) from the active policy PDF with physical PDF page citations.
  */
 
 import { useState, useEffect } from 'react';
@@ -87,7 +87,7 @@ export default function PolicySummaryCardsView() {
       <div className="card" style={{ marginBottom: 'var(--space-6)', backgroundColor: 'var(--color-slate-50)' }}>
         <div className="card__body" style={{ textAlign: 'center', padding: 'var(--space-6)' }}>
           <FileText size={32} color="var(--color-slate-400)" style={{ margin: '0 auto var(--space-3)' }} />
-          <h4 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-slate-800)' }}>
+          <h4 style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-slate-800)' }}>
             No Active Policy Document Uploaded
           </h4>
           <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-slate-600)', marginTop: 'var(--space-2)' }}>
@@ -103,7 +103,7 @@ export default function PolicySummaryCardsView() {
       {/* Section Title */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-4)', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
         <div>
-          <h3 style={{ fontSize: 'var(--font-size-md)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-slate-900)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+          <h3 style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'var(--font-size-md)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-slate-900)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
             <BookOpen size={20} color="var(--color-teal-600)" /> Key Policy Clause Summaries
           </h3>
           <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-slate-500)', marginTop: '2px' }}>
@@ -131,7 +131,8 @@ export default function PolicySummaryCardsView() {
               backgroundColor: 'white',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between'
+              justifyContent: 'space-between',
+              borderRadius: '0px'
             }}
           >
             <div className="card__body" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
@@ -144,13 +145,13 @@ export default function PolicySummaryCardsView() {
                       justifyContent: 'center',
                       width: '32px',
                       height: '32px',
-                      borderRadius: 'var(--radius-md)',
+                      borderRadius: '0px',
                       backgroundColor: cat.has_evidence ? 'var(--color-teal-50)' : 'var(--color-slate-100)',
                       color: cat.has_evidence ? 'var(--color-teal-600)' : 'var(--color-slate-500)'
                     }}>
                       {categoryIcons[cat.category_key] || <HelpCircle size={18} />}
                     </div>
-                    <h4 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-slate-900)' }}>
+                    <h4 style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-slate-900)' }}>
                       {cat.category_label}
                     </h4>
                   </div>
@@ -184,7 +185,7 @@ export default function PolicySummaryCardsView() {
                       borderLeft: '2px solid var(--color-teal-500)',
                       backgroundColor: 'var(--color-slate-50)',
                       padding: 'var(--space-2) var(--space-3)',
-                      borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
+                      borderRadius: '0px',
                       margin: '0 0 var(--space-3) 0',
                       fontStyle: 'italic',
                       lineHeight: '1.5',
@@ -207,4 +208,3 @@ export default function PolicySummaryCardsView() {
     </div>
   );
 }
-

@@ -136,8 +136,9 @@ export default function CoverageCalculatorView() {
         className="card"
         style={{
           marginBottom: 'var(--space-6)',
-          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.05) 0%, rgba(13, 148, 136, 0.06) 100%)',
-          border: '1px solid rgba(13, 148, 136, 0.25)',
+          backgroundColor: 'var(--color-slate-50)',
+          border: '1px solid var(--color-slate-200)',
+          borderRadius: '0px'
         }}
       >
         <div
@@ -148,7 +149,7 @@ export default function CoverageCalculatorView() {
             style={{
               background: 'var(--color-teal-600)',
               color: 'white',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: '0px',
               padding: 'var(--space-3)',
               display: 'flex',
               alignItems: 'center',
@@ -159,12 +160,12 @@ export default function CoverageCalculatorView() {
           </div>
           <div style={{ flex: 1, minWidth: '260px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
-              <h3 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-navy-900)' }}>
+              <h3 style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-slate-900)' }}>
                 Rule-Based Coverage & Out-of-Pocket Estimator
               </h3>
               <span className="badge badge--teal">Rule-Based Estimator</span>
             </div>
-            <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-600)', marginTop: 'var(--space-1)', lineHeight: '1.5' }}>
+            <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-slate-600)', marginTop: 'var(--space-1)', lineHeight: '1.5' }}>
               Combines official CGHS treatment reference benchmarks with your user-confirmed policy parameters (Sum Insured, Co-pay %, Sub-limits) to generate transparent out-of-pocket estimates and step-by-step arithmetic reasoning trails.
             </p>
           </div>

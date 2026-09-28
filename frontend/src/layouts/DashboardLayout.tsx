@@ -10,15 +10,16 @@ import { useBackendStatus } from '../hooks/useBackendStatus';
 import { fetchActivePolicy } from '../services/api';
 import type { ActiveDocumentInfo } from '../types';
 
-const pageMeta: Record<string, { title: string; subtitle: string }> = {
-  '/': { title: 'Overview', subtitle: 'Understand your health coverage and reference rates at a glance' },
-  '/policy': { title: 'Policy Intelligence', subtitle: 'Upload policy document, view automated summary cards, and ask cited questions' },
-  '/treatment': { title: 'Treatment Estimate & Coverage', subtitle: 'Calculate rule-based out-of-pocket estimates and CGHS reference benchmarks' },
-  '/about': { title: 'Data Sources & Documentation', subtitle: 'Methodology, official CGHS reference schedules, and disclaimers' },
+const pageMeta: Record<string, { title: string; subtitle: string; theme: string }> = {
+  '/overview': { title: 'Overview', subtitle: 'Understand your health coverage and reference rates at a glance', theme: 'theme-overview' },
+  '/policy': { title: 'Policy Intelligence', subtitle: 'Upload policy document, view automated summary cards, and ask cited questions', theme: 'theme-policy' },
+  '/treatment': { title: 'Treatment Estimate & Coverage', subtitle: 'Calculate rule-based out-of-pocket estimates and CGHS reference benchmarks', theme: 'theme-treatment' },
+  '/about': { title: 'Data Sources & Documentation', subtitle: 'Methodology, official CGHS reference schedules, and disclaimers', theme: 'theme-about' },
 };
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activePolicy, setActivePolicy] = useState<ActiveDocumentInfo | null>(null);
   const location = useLocation();
   const { status: connectionStatus } = useBackendStatus();
@@ -39,14 +40,16 @@ export default function DashboardLayout() {
     return () => { isMounted = false; };
   }, [location.pathname]);
 
-  const meta = pageMeta[location.pathname] || pageMeta['/'];
+  const meta = pageMeta[location.pathname] || pageMeta['/overview'];
 
   return (
-    <div className="layout">
+    <div className={`layout ${meta.theme}${sidebarCollapsed ? ' layout--collapsed' : ''}`}>
       <Sidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         connectionStatus={connectionStatus}
+        isCollapsed={sidebarCollapsed}
+        onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
 
       <div className="layout__main">
@@ -88,4 +91,3 @@ export default function DashboardLayout() {
     </div>
   );
 }
-

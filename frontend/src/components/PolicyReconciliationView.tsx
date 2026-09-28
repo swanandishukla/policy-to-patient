@@ -126,8 +126,9 @@ export default function PolicyReconciliationView() {
         className="card"
         style={{
           marginBottom: 'var(--space-6)',
-          background: 'linear-gradient(135deg, rgba(13, 148, 136, 0.06) 0%, rgba(30, 41, 59, 0.05) 100%)',
-          border: '1px solid rgba(20, 184, 166, 0.25)',
+          backgroundColor: 'var(--color-slate-50)',
+          border: '1px solid var(--color-slate-200)',
+          borderRadius: '0px'
         }}
       >
         <div
@@ -136,9 +137,9 @@ export default function PolicyReconciliationView() {
         >
           <div
             style={{
-              background: 'var(--color-navy-900)',
+              background: 'var(--color-slate-900)',
               color: 'var(--color-teal-400)',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: '0px',
               padding: 'var(--space-3)',
               display: 'flex',
               alignItems: 'center',
@@ -149,12 +150,12 @@ export default function PolicyReconciliationView() {
           </div>
           <div style={{ flex: 1, minWidth: '260px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
-              <h3 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-navy-900)' }}>
+              <h3 style={{ fontFamily: 'var(--font-family-heading)', fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-slate-900)' }}>
                 Policy Wording & CGHS Treatment Rate Reconciliation
               </h3>
               <span className="badge badge--teal">Policy & Rate Reconciliation</span>
             </div>
-            <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-600)', marginTop: 'var(--space-1)', lineHeight: '1.5' }}>
+            <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-slate-600)', marginTop: 'var(--space-1)', lineHeight: '1.5' }}>
               Select a procedure to compare its official CGHS reference benchmark rate against relevant clauses retrieved from your uploaded policy PDF.
             </p>
           </div>
@@ -179,10 +180,10 @@ export default function PolicyReconciliationView() {
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-6)' }}>
           {/* Controls Form */}
-          <div className="card">
+          <div className="card" style={{ border: '1px solid #fde68a', borderTop: '3px solid #d97706', boxShadow: 'var(--shadow-sm)' }}>
             <div className="card__body">
               <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-5)' }}>
-                <div className="step__icon" style={{ width: '36px', height: '36px', margin: 0 }}>
+                <div className="step__icon" style={{ width: '36px', height: '36px', margin: 0, background: '#fffbeb', color: '#d97706', border: '1px solid #fde68a' }}>
                   <Layers size={18} />
                 </div>
                 <div>
@@ -219,7 +220,7 @@ export default function PolicyReconciliationView() {
                       width: '100%',
                       padding: 'var(--space-3)',
                       borderRadius: 'var(--radius-md)',
-                      border: '1px solid var(--color-gray-300)',
+                      border: '1px solid #cbd5e1',
                       backgroundColor: 'white',
                       fontSize: 'var(--font-size-xs)',
                       color: 'var(--color-navy-900)',
@@ -257,7 +258,7 @@ export default function PolicyReconciliationView() {
                       width: '100%',
                       padding: 'var(--space-3)',
                       borderRadius: 'var(--radius-md)',
-                      border: '1px solid var(--color-gray-300)',
+                      border: '1px solid #cbd5e1',
                       backgroundColor: 'white',
                       fontSize: 'var(--font-size-xs)',
                       color: 'var(--color-navy-900)',
@@ -295,7 +296,7 @@ export default function PolicyReconciliationView() {
                       width: '100%',
                       padding: 'var(--space-3)',
                       borderRadius: 'var(--radius-md)',
-                      border: '1px solid var(--color-gray-300)',
+                      border: '1px solid #cbd5e1',
                       backgroundColor: 'white',
                       fontSize: 'var(--font-size-xs)',
                       color: 'var(--color-navy-900)',
@@ -350,7 +351,7 @@ export default function PolicyReconciliationView() {
                 </p>
               </div>
             ) : reconcileError ? (
-              <div className="card">
+              <div className="card" style={{ border: '1px solid #fecdd3' }}>
                 <div className="card__body" style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
                   <AlertCircle size={32} color="var(--color-warning-500)" style={{ margin: '0 auto var(--space-3)' }} />
                   <h4 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-navy-800)' }}>
@@ -364,11 +365,11 @@ export default function PolicyReconciliationView() {
             ) : reconcileResult ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
                 {/* 1. CGHS Benchmark Section */}
-                <div className="card" style={{ borderLeft: '4px solid var(--color-teal-500)' }}>
+                <div className="card" style={{ border: '1px solid #fde68a', borderLeft: '4px solid #d97706', boxShadow: 'var(--shadow-sm)' }}>
                   <div className="card__body">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-3)' }}>
-                      <span className="badge badge--teal" style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        CGHS Reference Benchmark Rate
+                      <span className="badge" style={{ backgroundColor: '#fffbeb', color: '#b45309', border: '1px solid #fde68a', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        CGHS Reference Benchmark Rate (13 Oct 2025)
                       </span>
                       <span className="badge badge--navy">[{reconcileResult.procedure_code}]</span>
                     </div>
@@ -380,21 +381,22 @@ export default function PolicyReconciliationView() {
                     {reconcileResult.benchmark_rate && (
                       <div
                         style={{
-                          backgroundColor: 'var(--color-navy-900)',
+                          backgroundColor: '#022c22',
                           color: 'white',
                           borderRadius: 'var(--radius-md)',
                           padding: 'var(--space-4)',
                           marginTop: 'var(--space-3)',
                           textAlign: 'center',
+                          border: '1px solid #065f46'
                         }}
                       >
-                        <p style={{ fontSize: 'var(--font-size-xs)', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>
-                          Reference CGHS Benchmark Amount
+                        <p style={{ fontSize: 'var(--font-size-xs)', color: '#a7f3d0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                          Reference CGHS Benchmark Amount (MoHFW)
                         </p>
-                        <div style={{ fontSize: '1.75rem', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-teal-300)', margin: 'var(--space-1) 0' }}>
+                        <div style={{ fontSize: '1.75rem', fontWeight: 'var(--font-weight-bold)', color: '#6ee7b7', margin: 'var(--space-1) 0', fontVariantNumeric: 'tabular-nums' }}>
                           ₹{reconcileResult.benchmark_rate.final_benchmark_rate_inr.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} INR
                         </div>
-                        <p style={{ fontSize: 'var(--font-size-xs)', color: 'rgba(255,255,255,0.8)' }}>
+                        <p style={{ fontSize: 'var(--font-size-xs)', color: '#ecfdf5' }}>
                           Facility: {reconcileResult.benchmark_rate.hospital_accreditation} • Ward: {reconcileResult.benchmark_rate.ward_entitlement}
                         </p>
                       </div>
@@ -406,7 +408,7 @@ export default function PolicyReconciliationView() {
                 </div>
 
                 {/* 2. Active Policy Status & Retrieved Clauses Section */}
-                <div className="card">
+                <div className="card" style={{ border: '1px solid #cbd5e1', boxShadow: 'var(--shadow-sm)' }}>
                   <div className="card__body">
                     <h4
                       style={{
@@ -458,14 +460,14 @@ export default function PolicyReconciliationView() {
                             <div
                               key={clause.chunk_id || idx}
                               style={{
-                                border: '1px solid var(--color-gray-200)',
+                                border: '1px solid #fde68a',
                                 borderRadius: 'var(--radius-md)',
                                 padding: 'var(--space-4)',
-                                backgroundColor: 'var(--color-gray-50)',
+                                backgroundColor: '#fffbeb',
                               }}
                             >
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-2)' }}>
-                                <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-navy-800)' }}>
+                                <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-semibold)', color: '#92400e' }}>
                                   {clause.section_title}
                                 </span>
                                 <span className="badge badge--navy">Physical Page {clause.page_number}</span>
@@ -474,7 +476,7 @@ export default function PolicyReconciliationView() {
                                 style={{
                                   fontSize: 'var(--font-size-xs)',
                                   color: 'var(--color-navy-900)',
-                                  borderLeft: '3px solid var(--color-teal-500)',
+                                  borderLeft: '3px solid #d97706',
                                   paddingLeft: 'var(--space-3)',
                                   margin: 0,
                                   fontStyle: 'normal',
@@ -492,7 +494,7 @@ export default function PolicyReconciliationView() {
                 </div>
 
                 {/* 3. Grounded Summary & Checklist */}
-                <div className="card">
+                <div className="card" style={{ border: '1px solid #cbd5e1', boxShadow: 'var(--shadow-sm)' }}>
                   <div className="card__body">
                     <h4
                       style={{
@@ -515,8 +517,8 @@ export default function PolicyReconciliationView() {
                         fontSize: 'var(--font-size-xs)',
                         color: 'var(--color-navy-800)',
                         lineHeight: '1.6',
-                        backgroundColor: 'rgba(13, 148, 136, 0.05)',
-                        border: '1px solid rgba(20, 184, 166, 0.2)',
+                        backgroundColor: '#f0fdfa',
+                        border: '1px solid #99f6e4',
                         borderRadius: 'var(--radius-md)',
                         padding: 'var(--space-4)',
                         marginBottom: 'var(--space-5)',
