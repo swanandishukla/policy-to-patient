@@ -3,6 +3,7 @@ Pydantic response schemas for the API.
 Phase 1: PDF policy upload, page extraction, TOC detection, and neutral term mentions.
 Phase 2: RAG Q&A retrieval and grounded answer responses.
 Phase 3: Curated treatment rate benchmark dataset and transparent estimate calculator.
+Phase 4: Policy wording and treatment benchmark reconciliation (Milestone 4.1).
 """
 
 from typing import List, Dict, Any, Optional
@@ -148,3 +149,64 @@ class TreatmentEstimateResponse(BaseModel):
     calculation_breakdown: str
     source_details: SourceDetailsSchema
     disclaimer: str
+
+
+class ReconciledClauseSchema(BaseModel):
+    """Schema for a policy wording passage retrieved during reconciliation."""
+    chunk_id: str
+    page_number: int
+    section_title: str
+    text: str
+    relevance_score: float
+
+
+class PolicyReconcileResponse(BaseModel):
+    """Schema for policy wording and treatment benchmark reconciliation result."""
+    procedure_code: str
+    procedure_name: str
+    has_active_policy: bool
+    policy_filename: Optional[str] = None
+    benchmark_rate: Optional[TreatmentEstimateResponse] = None
+    retrieved_policy_clauses: List[ReconciledClauseSchema]
+    has_relevant_clauses: bool
+    clause_summary: str
+    tpa_verification_checklist: List[str]
+    disclaimer: str
+
+
+class CoverageCalculateResponse(BaseModel):
+    """Response schema for rule-based coverage and out-of-pocket calculation."""
+    procedure_code: str
+    procedure_name: str
+    benchmark_amount_inr: float
+    user_sum_insured_inr: float
+    user_co_pay_percent: float
+    user_sub_limit_inr: Optional[float] = None
+    applicable_amount_inr: float
+    estimated_insurer_payable_inr: float
+    estimated_out_of_pocket_inr: float
+    reasoning_trail: List[str]
+    provenance_notes: Dict[str, str]
+    disclaimer: str
+
+
+class PolicySummaryCategorySchema(BaseModel):
+    """Schema for a single topic category summary card."""
+    category_key: str
+    category_label: str
+    summary_text: str
+    has_evidence: bool
+    page_number: Optional[int] = None
+    section_title: Optional[str] = None
+    evidence_snippet: Optional[str] = None
+    disclaimer_note: Optional[str] = None
+
+
+class PolicySummaryResponse(BaseModel):
+    """Response schema for automatically generated policy summary cards."""
+    has_active_policy: bool
+    filename: Optional[str] = None
+    total_pages: Optional[int] = None
+    categories: List[PolicySummaryCategorySchema]
+    message: str
+

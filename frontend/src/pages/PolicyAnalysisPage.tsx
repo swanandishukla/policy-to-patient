@@ -32,6 +32,7 @@ import type {
   PolicyQAResponse,
   EvidencePassage,
 } from '../types';
+import PolicySummaryCardsView from '../components/PolicySummaryCardsView';
 
 const extractionFeatures = [
   { icon: <Shield size={18} />, label: 'Page-by-Page Text', sublabel: 'Preserves PDF page order and text' },
@@ -181,13 +182,13 @@ export default function PolicyAnalysisPage() {
         </p>
       </div>
 
-      {/* Phase 2 Disclaimer Notice */}
+      {/* Document Intelligence Scope Notice */}
       <div className="info-box info-box--accent" style={{ marginBottom: 'var(--space-6)' }}>
         <div className="info-box__icon">
           <Info size={18} />
         </div>
         <div className="info-box__content">
-          <p className="info-box__title">Phase 2 Document Intelligence Scope</p>
+          <p className="info-box__title">Document Intelligence Scope</p>
           <p className="info-box__text">
             Question-answering uses Retrieval-Augmented Generation (RAG) to locate source passages and provide cited answers.
             It does <strong>not</strong> make formal claim approval decisions or replace official insurance advice.
@@ -413,6 +414,9 @@ export default function PolicyAnalysisPage() {
               </div>
             )}
           </div>
+
+          {/* Automatic Policy Summary Cards (Milestone C) */}
+          <PolicySummaryCardsView key={result?.filename || 'policy-summary-view'} />
 
           {/* Navigation Tabs */}
           <div style={{ display: 'flex', borderBottom: '2px solid var(--color-border-subtle)', gap: 'var(--space-6)' }}>
@@ -1022,7 +1026,7 @@ export default function PolicyAnalysisPage() {
       {!result && (
         <div className="section" style={{ marginTop: 'var(--space-8)' }}>
           <div className="section__header">
-            <h3 className="section__title">Phase 2 Policy Intelligence Capabilities</h3>
+            <h3 className="section__title">Policy Intelligence Capabilities</h3>
             <p className="section__description">
               Upload any health insurance policy PDF to extract structural data and ask natural language questions with physical page citations.
             </p>

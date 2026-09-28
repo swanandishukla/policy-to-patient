@@ -1,5 +1,5 @@
 /**
- * Sources & About page — product information, methodology, and development status.
+ * Sources & About page — product information, dataset documentation, and methodology.
  */
 
 import {
@@ -8,180 +8,196 @@ import {
   Database,
   AlertTriangle,
   Lock,
-  Scale,
   CheckCircle2,
-  Clock,
-  Circle,
+  ExternalLink
 } from 'lucide-react';
 
-const phases = [
+const capabilities = [
   {
-    name: 'Phase 0 — Foundation',
-    desc: 'Application shell, design system, backend API, and responsive UI.',
-    status: 'active',
+    title: 'Policy PDF Upload & Page Indexing',
+    desc: 'Extracts policy text page-by-page using PyMuPDF (fitz), preserving physical PDF page numbers, Table of Contents, and section headers.',
   },
   {
-    name: 'Phase 1 — Policy Upload & Extraction',
-    desc: 'PDF upload, text extraction, page-aware chunking, and metadata.',
-    status: 'pending',
+    title: 'Automated 6-Category Summary Cards',
+    desc: 'Analyzes active policy wording for Waiting Periods, Room Rent Limits, Co-Payment, Key Exclusions, Pre-existing Disease, and Sum Insured with page citations.',
   },
   {
-    name: 'Phase 2 — AI & Retrieval',
-    desc: 'LLM-powered Q&A with exact policy section citations.',
-    status: 'pending',
+    title: 'Evidence-Grounded Policy Q&A',
+    desc: 'Answers user questions using Google Gemini constrained strictly to retrieved passages, citing exact physical PDF page numbers (e.g. [Page 31]).',
   },
   {
-    name: 'Phase 3 — Treatment Cost Data',
-    desc: 'Verified treatment-rate dataset from official government sources.',
-    status: 'pending',
+    title: 'Official CGHS 2025 Benchmark Dataset',
+    desc: 'Includes verified reference rates from CGHS Rate List 2025 (F.No.5-16/CGHS(HQ)/HEC/2024(Part I)) with Tier 1 city and ward adjustments.',
   },
   {
-    name: 'Phase 4 — Policy Rules & Calculator',
-    desc: 'Deterministic coverage calculator with transparent assumptions.',
-    status: 'pending',
+    title: 'Policy & Rate Reconciliation',
+    desc: 'Retrieves relevant policy wording clauses for selected medical procedures and compares them against CGHS reference rates with TPA verification checklists.',
   },
   {
-    name: 'Phase 5 — Testing & Demonstration',
-    desc: 'End-to-end verification with synthetic scenarios and public data.',
-    status: 'pending',
+    title: 'Rule-Based Coverage & Out-of-Pocket Estimator',
+    desc: 'Calculates applicable baseline amounts, co-payment deductions, and estimated out-of-pocket expenses with step-by-step arithmetic reasoning trails.',
   },
 ];
 
-function PhaseIcon({ status }: { status: string }) {
-  if (status === 'active') return <CheckCircle2 size={18} style={{ color: 'var(--color-teal-600)' }} />;
-  if (status === 'pending') return <Clock size={18} style={{ color: 'var(--color-gray-400)' }} />;
-  return <Circle size={18} style={{ color: 'var(--color-gray-300)' }} />;
-}
-
 export default function SourcesAboutPage() {
   return (
-    <div>
-      {/* Purpose */}
-      <div className="about-section">
-        <h2 className="about-section__title">
-          <ShieldCheck size={20} style={{ color: 'var(--color-teal-600)' }} />
-          What Policy-to-Patient does
-        </h2>
-        <p className="about-section__text">
-          Policy-to-Patient is designed to be an AI-powered insurance policy intelligence
-          assistant. It will help users understand health insurance coverage by extracting
-          structured information from policy documents and answering questions with
-          citations to the exact policy sections.
-        </p>
-        <p className="about-section__text">
-          When fully operational, users will be able to select a treatment procedure and
-          see a transparent reference cost alongside an illustrative estimate of potential
-          insurer contribution and out-of-pocket expense.
-        </p>
-      </div>
-
-      {/* Evidence System */}
-      <div className="about-section">
-        <h2 className="about-section__title">
-          <FileSearch size={20} style={{ color: 'var(--color-teal-600)' }} />
-          How the evidence system will work
-        </h2>
-        <p className="about-section__text">
-          Every answer will cite specific pages, sections, or clauses from the uploaded
-          policy document. The system will use retrieval-augmented generation (RAG) to
-          find relevant policy text before formulating a response. If the policy does
-          not contain sufficient information to answer a question, the system will say so
-          explicitly rather than speculate.
-        </p>
-      </div>
-
-      {/* Treatment Data */}
-      <div className="about-section">
-        <h2 className="about-section__title">
-          <Database size={20} style={{ color: 'var(--color-teal-600)' }} />
-          Treatment-rate reference data
-        </h2>
-        <p className="about-section__text">
-          Treatment reference costs must be traceable to a specific source, version, and
-          publication date. The application will use officially published tariff data
-          (such as CGHS rates) rather than crowdsourced or unverified figures.
-          Each rate entry will indicate the procedure definition, applicable city or
-          category, and the tariff version it belongs to.
-        </p>
-      </div>
-
-      {/* Not a Claim System */}
-      <div className="about-section">
-        <h2 className="about-section__title">
-          <AlertTriangle size={20} style={{ color: 'var(--color-warning)' }} />
-          Estimates are not claim settlements
-        </h2>
-        <p className="about-section__text">
-          Coverage estimates produced by this tool are illustrative calculations based on
-          the policy wording and reference cost data available. They are not claim
-          approvals, guarantees of payment, or binding commitments by any insurer.
-          Actual claim settlement depends on the insurer's assessment, policy terms,
-          medical documentation, and applicable regulations.
-        </p>
-      </div>
-
-      {/* Privacy */}
-      <div className="about-section">
-        <h2 className="about-section__title">
-          <Lock size={20} style={{ color: 'var(--color-teal-600)' }} />
-          Privacy and consent
-        </h2>
-        <p className="about-section__text">
-          Do not upload someone else's private insurance policy document without their
-          explicit permission. Health insurance policies contain personal information.
-          This application processes documents locally for analysis and does not share
-          policy content with third parties beyond what is needed for the language model
-          to generate answers.
-        </p>
-      </div>
-
-      {/* Distinctions */}
-      <div className="about-section">
-        <h2 className="about-section__title">
-          <Scale size={20} style={{ color: 'var(--color-teal-600)' }} />
-          Understanding the components
-        </h2>
-        <p className="about-section__text">
-          This application works with four distinct types of information, and it is
-          important to understand the difference between them:
-        </p>
-        <p className="about-section__text">
-          <strong>Policy wording</strong> is the original text from your insurance document.
-          <strong> Interpretation</strong> is what the AI model understands from that text, which
-          may be imperfect. <strong>Reference treatment costs</strong> are published rates from
-          official sources, separate from your policy. <strong>Illustrative calculations</strong> combine
-          these inputs using deterministic rules, and their accuracy depends on the quality
-          of each component.
-        </p>
-      </div>
-
-      {/* Development Status */}
-      <div className="about-section">
-        <h2 className="about-section__title" style={{ marginBottom: 'var(--space-2)' }}>
-          Development status
-        </h2>
-        <p className="about-section__text" style={{ marginBottom: 'var(--space-4)' }}>
-          Policy-to-Patient is being built in incremental phases. Each phase will be
-          tested and verified before proceeding.
-        </p>
-
-        <div className="phase-list">
-          {phases.map((phase) => (
-            <div className="phase-item" key={phase.name}>
-              <div className="phase-item__status">
-                <PhaseIcon status={phase.status} />
-              </div>
-              <div className="phase-item__content">
-                <p className="phase-item__name">{phase.name}</p>
-                <p className="phase-item__desc">{phase.desc}</p>
-              </div>
-              <span className={`status-badge status-badge--${phase.status}`}>
-                {phase.status === 'active' ? 'Current' : 'Upcoming'}
-              </span>
+    <div className="about-container">
+      {/* Product Overview Header */}
+      <div className="card about-header-card" style={{ marginBottom: 'var(--space-6)' }}>
+        <div className="card__body">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-3)' }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '40px',
+              height: '40px',
+              borderRadius: 'var(--radius-md)',
+              backgroundColor: 'var(--color-teal-50)',
+              color: 'var(--color-teal-600)'
+            }}>
+              <ShieldCheck size={24} />
             </div>
-          ))}
+            <div>
+              <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-slate-900)' }}>
+                Policy-to-Patient Documentation
+              </h2>
+              <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-slate-500)' }}>
+                Insurance Coverage & Treatment Cost Intelligence Assistant
+              </p>
+            </div>
+          </div>
+          <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-slate-700)', lineHeight: '1.6' }}>
+            Policy-to-Patient helps healthcare consumers and policyholders understand complex health insurance policy wording, identify waiting periods and room-rent caps, and estimate treatment expenses using official reference benchmark rates.
+          </p>
+        </div>
+      </div>
+
+      {/* Official CGHS 2025 Dataset Section */}
+      <div className="card about-section-card" style={{ marginBottom: 'var(--space-6)' }}>
+        <div className="card__body">
+          <h3 className="about-section__title">
+            <Database size={20} style={{ color: 'var(--color-teal-600)' }} />
+            Official Treatment Benchmark Data Sources
+          </h3>
+          <p className="about-section__text">
+            Treatment cost calculations are grounded in official government tariff schedules rather than crowdsourced estimates:
+          </p>
+
+          <div style={{
+            backgroundColor: 'var(--color-slate-50)',
+            border: '1px solid var(--color-slate-200)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-4)',
+            margin: 'var(--space-4) 0',
+            fontSize: 'var(--font-size-xs)'
+          }}>
+            <p style={{ fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-slate-900)', marginBottom: 'var(--space-2)' }}>
+              CGHS Rate Schedule Reference Metadata:
+            </p>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', color: 'var(--color-slate-700)' }}>
+              <li><strong>Source Document:</strong> CGHS Rates for Healthcare Organisations (Annexure-I Part A)</li>
+              <li><strong>Document Reference:</strong> F.No.5-16/CGHS(HQ)/HEC/2024(Part I)</li>
+              <li><strong>Issuing Authority:</strong> Directorate General of Central Government Health Scheme, MoHFW, Govt. of India</li>
+              <li><strong>Effective Date:</strong> October 13, 2025</li>
+              <li><strong>City Classification:</strong> Tier 1 (X Cities: Delhi NCR, Mumbai, Kolkata, Chennai, Bengaluru, Hyderabad, Pune, Ahmedabad)</li>
+              <li><strong>Ward Adjustment Rules:</strong> Semi-Private Ward (Base Rate), General Ward (-5%), Private Ward (+5%). Consultations and diagnostic investigations remain uniform across ward entitlements.</li>
+            </ul>
+            <div style={{ marginTop: 'var(--space-3)' }}>
+              <a
+                href="https://dgehs.delhi.gov.in/sites/default/files/DGHS/universal/cghs_rate.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--secondary btn--sm"
+                style={{ fontSize: '11px', display: 'inline-flex', alignItems: 'center', gap: 'var(--space-1)' }}
+              >
+                <span>View Official CGHS 2025 PDF Tariff Schedule</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+          <p className="about-section__text" style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-slate-500)' }}>
+            Note: The current MVP dataset contains verified entries for supported surgical and medical procedures (including Cataract Surgery, Knee Replacement, Appendectomy, Cholecystectomy, and Coronary Angioplasty).
+          </p>
+        </div>
+      </div>
+
+      {/* Evidence & Grounding System */}
+      <div className="card about-section-card" style={{ marginBottom: 'var(--space-6)' }}>
+        <div className="card__body">
+          <h3 className="about-section__title">
+            <FileSearch size={20} style={{ color: 'var(--color-teal-600)' }} />
+            Page-Aware Evidence Retrieval Methodology
+          </h3>
+          <p className="about-section__text">
+            Policy-to-Patient uses passage retrieval over page-indexed policy chunks. For every question asked, the system retrieves relevant clauses and requires the language model to cite the exact physical PDF page number.
+          </p>
+          <p className="about-section__text">
+            If the retrieved policy wording does not contain sufficient evidence to answer a specific query, the system explicitly states that insufficient evidence was found rather than hallucinating insurance terms.
+          </p>
+        </div>
+      </div>
+
+      {/* Product Capability Checklist */}
+      <div className="card about-section-card" style={{ marginBottom: 'var(--space-6)' }}>
+        <div className="card__body">
+          <h3 className="about-section__title">
+            <CheckCircle2 size={20} style={{ color: 'var(--color-teal-600)' }} />
+            Verified Core Capabilities
+          </h3>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-4)', marginTop: 'var(--space-4)' }}>
+            {capabilities.map((cap) => (
+              <div
+                key={cap.title}
+                style={{
+                  padding: 'var(--space-4)',
+                  backgroundColor: 'var(--color-slate-50)',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--color-slate-200)'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
+                  <CheckCircle2 size={16} color="var(--color-teal-600)" />
+                  <h4 style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--color-slate-900)' }}>
+                    {cap.title}
+                  </h4>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-slate-600)', lineHeight: '1.5' }}>
+                  {cap.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Limitations & Legal Disclaimers */}
+      <div className="info-box info-box--warning" style={{ marginBottom: 'var(--space-6)' }}>
+        <div className="info-box__icon">
+          <AlertTriangle size={18} />
+        </div>
+        <div className="info-box__content">
+          <p className="info-box__title">Informational Scope & Disclaimers</p>
+          <p className="info-box__text">
+            Estimates and calculations produced by Policy-to-Patient are illustrative decision-support figures based on policy wording passages and CGHS benchmark schedules. They do not constitute formal insurance claim approval, guaranteed reimbursement quotes, or binding financial commitments. Final claim settlement depends entirely on your insurer/TPA evaluation and policy schedule terms.
+          </p>
+        </div>
+      </div>
+
+      {/* Privacy Notice */}
+      <div className="card about-section-card">
+        <div className="card__body">
+          <h3 className="about-section__title">
+            <Lock size={20} style={{ color: 'var(--color-teal-600)' }} />
+            Data Privacy & Security
+          </h3>
+          <p className="about-section__text">
+            Uploaded policy documents are parsed locally for session analysis. The system extracts text to enable page-cited Q&A without storing personal policy records for external commercial data harvesting.
+          </p>
         </div>
       </div>
     </div>
   );
 }
+

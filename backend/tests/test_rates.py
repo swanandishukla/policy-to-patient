@@ -1,11 +1,14 @@
 """
 Unit and integration tests for Phase 3 Treatment Rate Benchmark API and RateService.
+Includes Phase 4 Milestone 4.1 reconciliation schema tests.
 """
 
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
 from app.services.rate_service import RateService, RateNotFoundError, InvalidSelectionError, RateServiceError
+from app.schemas.requests import PolicyReconcileRequest
+from app.schemas.responses import PolicyReconcileResponse, ReconciledClauseSchema
 
 client = TestClient(app)
 
@@ -154,3 +157,44 @@ def test_api_estimate_invalid_ward():
     response = client.post("/api/rates/estimate", json=payload)
     assert response.status_code == 400
     assert "Invalid ward entitlement" in response.json()["detail"]
+
+
+def test_reconciliation_schemas_validation():
+    """Milestone 4.1: Test instantiation and validation of Phase 4 reconciliation request and response schemas."""
+    # Test PolicyReconcileRequest
+    req = PolicyReconcileRequest(
+        procedure_code="OP099",
+        hospital_accreditation="NABH",
+        ward_entitlement="Semi-Private Ward",
+        city_category="Tier 1 (X City)"
+    )
+    assert req.procedure_code == "OP099"
+    assert req.city_category == "Tier 1 (X City)"
+
+    # Test ReconciledClauseSchema
+    clause = ReconciledClauseSchema(
+        chunk_id="chunk_31_0",
+        page_number=31,
+        section_title="Section C.1.b Specified Disease/Procedure waiting period",
+        text="Expenses related to Cataract shall be excluded until expiry of 24 months...",
+        relevance_score=0.89
+    )
+    assert clause.page_number == 31
+    assert clause.relevance_score == 0.89
+
+    # Test PolicyReconcileResponse
+    res = PolicyReconcileResponse(
+        procedure_code="OP099",
+        procedure_name="Small Incision Cataract Surgery (SICS)",
+        has_active_policy=True,
+        policy_filename="policy_wording.pdf",
+        benchmark_rate=None,
+        retrieved_policy_clauses=[clause],
+        has_relevant_clauses=True,
+        clause_summary="Retrieved 24-month specified disease waiting period clause.",
+        tpa_verification_checklist=["Confirm how lens/IOL costs are treated under your policy schedule and with your insurer/TPA."],
+        disclaimer="NOTICE: Informational decision-support only. No coverage verdict or claim approval."
+    )
+    assert res.has_active_policy is True
+    assert res.retrieved_policy_clauses[0].page_number == 31
+    assert "Confirm how lens/IOL costs" in res.tpa_verification_checklist[0]

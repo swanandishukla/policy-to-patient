@@ -143,6 +143,73 @@ export interface TreatmentEstimateResponse {
   disclaimer: string;
 }
 
+export interface ReconciledClause {
+  chunk_id: string;
+  page_number: number;
+  section_title: string;
+  text: string;
+  relevance_score: number;
+}
+
+export interface PolicyReconcileResponse {
+  procedure_code: string;
+  procedure_name: string;
+  has_active_policy: boolean;
+  policy_filename?: string | null;
+  benchmark_rate?: TreatmentEstimateResponse | null;
+  retrieved_policy_clauses: ReconciledClause[];
+  has_relevant_clauses: boolean;
+  clause_summary: string;
+  tpa_verification_checklist: string[];
+  disclaimer: string;
+}
+
+export interface CoverageCalculateRequest {
+  procedure_code: string;
+  hospital_accreditation: string;
+  ward_entitlement: string;
+  city_category?: string;
+  sum_insured: number;
+  co_pay_percent: number;
+  applicable_sub_limit?: number | null;
+  copay_clause_reference?: string | null;
+  sublimit_clause_reference?: string | null;
+}
+
+export interface CoverageCalculateResponse {
+  procedure_code: string;
+  procedure_name: string;
+  benchmark_amount_inr: number;
+  user_sum_insured_inr: number;
+  user_co_pay_percent: number;
+  user_sub_limit_inr?: number | null;
+  applicable_amount_inr: number;
+  estimated_insurer_payable_inr: number;
+  estimated_out_of_pocket_inr: number;
+  reasoning_trail: string[];
+  provenance_notes: Record<string, string>;
+  disclaimer: string;
+}
+
+export interface PolicySummaryCategory {
+  category_key: string;
+  category_label: string;
+  summary_text: string;
+  has_evidence: boolean;
+  page_number?: number | null;
+  section_title?: string | null;
+  evidence_snippet?: string | null;
+  disclaimer_note?: string | null;
+}
+
+export interface PolicySummaryResponse {
+  has_active_policy: boolean;
+  filename?: string | null;
+  total_pages?: number | null;
+  categories: PolicySummaryCategory[];
+  message: string;
+}
+
 /**
  * Connection state for backend health check.
  */
@@ -157,3 +224,4 @@ export interface NavItem {
   icon: string;
   description: string;
 }
+

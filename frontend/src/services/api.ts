@@ -10,6 +10,10 @@ import type {
   ActiveDocumentInfo,
   ProceduresListResponse,
   TreatmentEstimateResponse,
+  PolicyReconcileResponse,
+  CoverageCalculateRequest,
+  CoverageCalculateResponse,
+  PolicySummaryResponse,
 } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
@@ -160,3 +164,93 @@ export async function calculateEstimate(params: {
 
   return response.json();
 }
+
+/**
+ * Reconcile selected procedure treatment benchmark with active policy wording clauses (Phase 4).
+ */
+export async function reconcilePolicy(params: {
+  procedure_code: string;
+  hospital_accreditation: string;
+  ward_entitlement: string;
+  city_category?: string;
+}): Promise<PolicyReconcileResponse> {
+  const response = await fetch(`${API_BASE_URL}/api/policy/reconcile`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      procedure_code: params.procedure_code,
+      hospital_accreditation: params.hospital_accreditation,
+      ward_entitlement: params.ward_entitlement,
+      city_category: params.city_category || 'Tier 1 (X City)',
+    }),
+  });
+
+  if (!response.ok) {
+    let errorMessage = `Policy reconciliation failed with status ${response.status}`;
+    try {
+      const errJson = await response.json();
+      if (errJson.detail) {
+        errorMessage = typeof errJson.detail === 'string' ? errJson.detail : JSON.stringify(errJson.detail);
+      }
+    } catch {
+      // ignore parse error
+    }
+    throw new Error(errorMessage);
+  }
+
+  return response.json();
+}
+
+/**
+ * Calculate transparent rule-based estimated coverage and out-of-pocket expenses (Milestone B).
+ */
+export async function calculateCoverage(
+  payload: CoverageCalculateRequest
+): Promise<CoverageCalculateResponse> {
+  const response = await fetch(`${API_BASE_URL}/api/coverage/calculate`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    let errorMessage = `Coverage calculation failed with status ${response.status}`;
+    try {
+      const errJson = await response.json();
+      if (errJson.detail) {
+        errorMessage = typeof errJson.detail === 'string' ? errJson.detail : JSON.stringify(errJson.detail);
+      }
+    } catch {
+      // ignore parse error
+    }
+    throw new Error(errorMessage);
+  }
+
+  return response.json();
+}
+
+/**
+ * Fetch automatically generated 6-category policy summary cards for active policy (Milestone C).
+ */
+export async function fetchPolicySummary(): Promise<PolicySummaryResponse> {
+  const response = await fetch(`${API_BASE_URL}/api/policy/summary`);
+  if (!response.ok) {
+    let errorMessage = `Failed to fetch policy summary cards: ${response.status}`;
+    try {
+      const errJson = await response.json();
+      if (errJson.detail) {
+        errorMessage = typeof errJson.detail === 'string' ? errJson.detail : JSON.stringify(errJson.detail);
+      }
+    } catch {
+      // ignore parse error
+    }
+    throw new Error(errorMessage);
+  }
+  return response.json();
+}
+
+

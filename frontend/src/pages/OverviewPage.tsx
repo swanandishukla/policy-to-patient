@@ -1,118 +1,192 @@
 /**
- * Overview page — dashboard landing with product introduction and key actions.
+ * Overview page — dashboard landing with real policy status and direct entry points.
  */
 
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   Upload,
   Search,
-  DollarSign,
+  Calculator,
   ArrowRight,
-  Info,
   ShieldCheck,
-  BookOpen,
+  FileText,
+  HelpCircle
 } from 'lucide-react';
+import { fetchActivePolicy } from '../services/api';
+import type { ActiveDocumentInfo } from '../types';
 
 export default function OverviewPage() {
   const navigate = useNavigate();
+  const [activePolicy, setActivePolicy] = useState<ActiveDocumentInfo | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchStatus = async () => {
+      try {
+        const res = await fetchActivePolicy();
+        if (isMounted) {
+          setActivePolicy(res);
+        }
+      } catch {
+        // Fallback on silent error
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+    fetchStatus();
+    return () => { isMounted = false; };
+  }, []);
 
   return (
-    <div>
-      {/* Hero */}
-      <div className="page-hero">
-        <h2 className="page-hero__title">
-          Understand your health insurance<br />before treatment.
+    <div className="overview-container">
+      {/* Hero Header */}
+      <div className="overview-hero">
+        <div className="overview-hero__badge">
+          <ShieldCheck size={14} />
+          <span>Health Insurance Intelligence</span>
+        </div>
+        <h2 className="overview-hero__title">
+          Understand your insurance coverage and reference rates before hospital admission.
         </h2>
-        <p className="page-hero__description">
-          Policy-to-Patient helps you explore your health insurance policy's coverage,
-          identify potential gaps, and see transparent reference costs for common treatments
-          — so you can make more informed decisions.
-        </p>
-
-        {/* Actions */}
-        <div style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', marginTop: 'var(--space-6)', flexWrap: 'wrap' }}>
-          <button
-            className="btn btn--primary"
-            onClick={() => navigate('/policy')}
-          >
-            Analyze a policy
-            <ArrowRight size={18} />
-          </button>
-          <button
-            className="btn btn--secondary"
-            onClick={() => navigate('/about')}
-          >
-            <BookOpen size={16} />
-            Explore how it works
-          </button>
-        </div>
-      </div>
-
-      {/* Three Steps */}
-      <div className="steps">
-        <div className="step card">
-          <div className="step__icon">
-            <Upload size={28} />
-          </div>
-          <h3 className="step__title">Upload your policy</h3>
-          <p className="step__text">
-            Share your health insurance policy document. We extract coverage details,
-            exclusions, waiting periods, and more.
-          </p>
-        </div>
-
-        <div className="step card">
-          <div className="step__icon">
-            <Search size={28} />
-          </div>
-          <h3 className="step__title">Understand your coverage</h3>
-          <p className="step__text">
-            Ask questions in plain language and receive answers with references
-            to specific sections of your policy.
-          </p>
-        </div>
-
-        <div className="step card">
-          <div className="step__icon">
-            <DollarSign size={28} />
-          </div>
-          <h3 className="step__title">Explore treatment costs</h3>
-          <p className="step__text">
-            See reference treatment costs from verified sources and understand
-            your potential out-of-pocket expenses.
-          </p>
-        </div>
-      </div>
-
-      {/* How It Works */}
-      <div className="how-it-works">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
-          <ShieldCheck size={22} style={{ color: 'var(--color-teal-600)' }} />
-          <h3 className="how-it-works__title" style={{ marginBottom: 0 }}>Evidence-backed answers</h3>
-        </div>
-        <p className="how-it-works__text">
-          Policy-to-Patient is designed to cite the exact section or page of your policy
-          for every answer. Treatment cost references will indicate their source, version,
-          and applicable conditions. Every estimate will clearly state what has been verified
-          and what has been assumed.
+        <p className="overview-hero__subtitle">
+          Upload your policy PDF to generate 6 automatic clause summary cards, ask plain-language questions grounded with physical PDF page citations, and calculate transparent treatment cost estimates.
         </p>
       </div>
 
-      {/* Disclaimer */}
-      <div className="info-box">
+      {/* Active Document Status Card */}
+      <div className="card overview-status-card">
+        <div className="card__body">
+          <div className="overview-status-card__header">
+            <div className="overview-status-card__left">
+              {loading ? (
+                <div className="overview-status-card__dot overview-status-card__dot--loading" />
+              ) : activePolicy?.has_active_document ? (
+                <div className="overview-status-card__dot overview-status-card__dot--active" />
+              ) : (
+                <div className="overview-status-card__dot overview-status-card__dot--empty" />
+              )}
+              <h3 className="overview-status-card__title">
+                {loading
+                  ? 'Checking policy status…'
+                  : activePolicy?.has_active_document
+                  ? 'Active Policy Document Loaded'
+                  : 'No Active Policy Uploaded Yet'}
+              </h3>
+            </div>
+            {!loading && (
+              <span className={`badge ${activePolicy?.has_active_document ? 'badge--teal' : 'badge--neutral'}`}>
+                {activePolicy?.has_active_document ? 'Ready for Q&A' : 'Awaiting Upload'}
+              </span>
+            )}
+          </div>
+
+          {activePolicy?.has_active_document && activePolicy.filename ? (
+            <div className="overview-status-card__details">
+              <div className="overview-status-card__file-info">
+                <FileText size={20} className="overview-status-card__file-icon" />
+                <div>
+                  <p className="overview-status-card__filename">{activePolicy.filename}</p>
+                  <p className="overview-status-card__meta">
+                    {activePolicy.total_pages} total pages extracted • Page-aware text indexing active
+                  </p>
+                </div>
+              </div>
+
+              <div className="overview-status-card__actions">
+                <Link to="/policy" className="btn btn--primary btn--sm">
+                  View Policy Summary & Q&A
+                  <ArrowRight size={15} />
+                </Link>
+                <Link to="/treatment" className="btn btn--secondary btn--sm">
+                  Estimate Treatment Costs
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="overview-status-card__empty-state">
+              <p className="overview-status-card__empty-text">
+                Upload your health insurance policy wording PDF to unlock clause analysis, waiting period breakdowns, co-payment checks, and page-cited Q&A.
+              </p>
+              <div className="overview-status-card__actions">
+                <Link to="/policy" className="btn btn--primary btn--sm">
+                  <Upload size={16} />
+                  Upload Policy PDF
+                </Link>
+                <Link to="/treatment" className="btn btn--secondary btn--sm">
+                  Browse CGHS Reference Rates
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* 3 Core Entry Point Cards */}
+      <div className="overview-grid">
+        <div className="card overview-card card--interactive" onClick={() => navigate('/policy')}>
+          <div className="card__body">
+            <div className="overview-card__icon-wrapper overview-card__icon-wrapper--teal">
+              <FileText size={24} />
+            </div>
+            <h3 className="overview-card__title">1. Policy Analysis & Summaries</h3>
+            <p className="overview-card__desc">
+              Upload your policy PDF to extract 6 automatic summary cards: Waiting Periods, Room Rent Limits, Co-Payments, Exclusions, Pre-existing Conditions, and Sum Insured.
+            </p>
+            <div className="overview-card__footer">
+              <span>Open Policy Analysis</span>
+              <ArrowRight size={16} />
+            </div>
+          </div>
+        </div>
+
+        <div className="card overview-card card--interactive" onClick={() => navigate('/policy')}>
+          <div className="card__body">
+            <div className="overview-card__icon-wrapper overview-card__icon-wrapper--blue">
+              <Search size={24} />
+            </div>
+            <h3 className="overview-card__title">2. Grounded Policy Q&A</h3>
+            <p className="overview-card__desc">
+              Ask questions in plain language and receive precise, evidence-grounded answers citing the exact physical PDF page number and clause section title.
+            </p>
+            <div className="overview-card__footer">
+              <span>Ask Policy Questions</span>
+              <ArrowRight size={16} />
+            </div>
+          </div>
+        </div>
+
+        <div className="card overview-card card--interactive" onClick={() => navigate('/treatment')}>
+          <div className="card__body">
+            <div className="overview-card__icon-wrapper overview-card__icon-wrapper--emerald">
+              <Calculator size={24} />
+            </div>
+            <h3 className="overview-card__title">3. Treatment & Coverage Calculator</h3>
+            <p className="overview-card__desc">
+              Select supported medical procedures to view official CGHS 2025 benchmark rates, reconcile clauses, and compute rule-based estimated out-of-pocket expenses.
+            </p>
+            <div className="overview-card__footer">
+              <span>Calculate Treatment Costs</span>
+              <ArrowRight size={16} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Governance & Informational Notice */}
+      <div className="info-box info-box--notice">
         <div className="info-box__icon">
-          <Info size={18} />
+          <HelpCircle size={18} />
         </div>
         <div className="info-box__content">
-          <p className="info-box__title">Important</p>
+          <p className="info-box__title">Informational Decision Support</p>
           <p className="info-box__text">
-            Policy-to-Patient is an informational decision-support tool. It does not process
-            insurance claims, guarantee coverage amounts, or replace professional advice.
-            Actual coverage, claim approval, and settlement depend entirely on your insurer
-            and the specific terms of your policy.
+            Policy-to-Patient provides rule-based coverage estimates combining verified CGHS reference benchmark schedules with user-confirmed policy parameters. It does not replace formal insurance claims processing or guarantee final claim approval.
           </p>
         </div>
       </div>
     </div>
   );
 }
+
